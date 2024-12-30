@@ -31,17 +31,27 @@ in {
   home.packages = [
     pkgs._1password-cli
     pkgs.asciinema
+    pkgs.awscli2
+    pkgs.atuin
+    pkgs.autojump
     pkgs.bat
+    pkgs.direnv
     pkgs.eza
     pkgs.fd
     pkgs.fzf
     pkgs.gh
+    pkgs.gnupg
     pkgs.htop
     pkgs.jq
+    pkgs.kubectl
+    pkgs.kubernetes-helm
+    pkgs.mysql84
     pkgs.ripgrep
     pkgs.sentry-cli
+    pkgs.tmux
     pkgs.tree
     pkgs.watch
+    pkgs.zoxide
 
     pkgs.gopls
     pkgs.zigpkgs."0.13.0"
@@ -141,16 +151,8 @@ in {
     };
   };
 
-  programs.fish = {
+  programs.zsh = {
     enable = true;
-    interactiveShellInit = lib.strings.concatStrings (lib.strings.intersperse "\n" ([
-      "source ${sources.theme-bobthefish}/functions/fish_prompt.fish"
-      "source ${sources.theme-bobthefish}/functions/fish_right_prompt.fish"
-      "source ${sources.theme-bobthefish}/functions/fish_title.fish"
-      (builtins.readFile ./config.fish)
-      "set -g SHELL ${pkgs.fish}/bin/fish"
-    ]));
-
     shellAliases = {
       ga = "git add";
       gc = "git commit";
@@ -176,19 +178,16 @@ in {
       name = n;
       src  = sources.${n};
     }) [
-      "fish-fzf"
-      "fish-foreign-env"
-      "theme-bobthefish"
     ];
   };
 
   programs.git = {
     enable = true;
-    userName = "Mitchell Hashimoto";
-    userEmail = "m@mitchellh.com";
+    userName = "Chris Denneen";
+    userEmail = "cdenneen@gmail.com";
     signing = {
       key = "523D5DC389D273BC";
-      signByDefault = true;
+      signByDefault = false;
     };
     aliases = {
       cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 -r git branch -d";
@@ -200,7 +199,7 @@ in {
       color.ui = true;
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
-      github.user = "mitchellh";
+      github.user = "cdenneen";
       push.default = "tracking";
       init.defaultBranch = "main";
     };
@@ -288,7 +287,6 @@ in {
     plugins = with pkgs; [
       customVim.vim-copilot
       customVim.vim-cue
-      customVim.vim-fish
       customVim.vim-glsl
       customVim.vim-misc
       customVim.vim-pgsql
