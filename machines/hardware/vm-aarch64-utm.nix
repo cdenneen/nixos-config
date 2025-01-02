@@ -23,11 +23,11 @@
       fsType = "vfat";
     };
 
-  fileSystems."/mnt/shared" =
-    { device = "http://localhost:9843/";
-      fsType = "davfs";
-      options = [ "nofail" "uid=1001" "gid=100" "file_mode=0770" "dir_mode=0770" ];
-    };
+  # fileSystems."/mnt/shared" =
+  #   { device = "http://localhost:9843/";
+  #     fsType = "davfs";
+  #     options = [ "nofail" "uid=1001" "gid=100" "file_mode=0770" "dir_mode=0770" ];
+  #   };
 
   swapDevices = [ ];
 
