@@ -357,8 +357,6 @@ in {
     plugins = with pkgs; [
       customVim.vim-copilot
       customVim.vim-cue
-      customVim.vim-glsl
-      customVim.vim-misc
       customVim.vim-pgsql
       customVim.vim-tla
       customVim.vim-zig
