@@ -8,6 +8,7 @@
   networking.interfaces.enp0s10.useDHCP = true;
 
   # Qemu
+  services.davfs2.enable = true;
   services.spice-vdagentd.enable = true;
 
   # For now, we need this since hardware acceleration does not work.
