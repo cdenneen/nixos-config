@@ -9,7 +9,9 @@
 
   # Qemu
   services.davfs2.enable = true;
-  services.spice-vdagentd.enable = true;
+  services.dbus.packages = with pkgs; [ gnome2.GConf ];
+  services.quemuGuest.enable = true;
+  services.spice-vdagentd.enable = mkSure true;
 
   # For now, we need this since hardware acceleration does not work.
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
