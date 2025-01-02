@@ -8,7 +8,13 @@
   networking.interfaces.enp0s10.useDHCP = true;
 
   # Qemu
-  services.davfs2.enable = true;
+  services.davfs2 = {
+    enable = true;
+    extraConfig = ''
+      ask_auth 0
+    '';
+  };
+
   services.dbus.packages = with pkgs; [ gnome2.GConf ];
   services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
