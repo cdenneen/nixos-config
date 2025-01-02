@@ -12,6 +12,7 @@
   services.dbus.packages = with pkgs; [ gnome2.GConf ];
   services.quemuGuest.enable = true;
   services.spice-vdagentd.enable = mkSure true;
+  services.spice-webdavd.enable = true;
 
   systemd.user.services.spice-agent = { 
     enable = true;
