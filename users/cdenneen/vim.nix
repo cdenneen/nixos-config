@@ -15,16 +15,6 @@ let sources = import ../../nix/sources.nix; in rec {
       src = sources.vim-cue;
     };
 
-    vim-glsl = vimUtils.buildVimPlugin {
-      name = "vim-glsl";
-      src = sources.vim-glsl;
-    };
-
-    vim-misc = vimUtils.buildVimPlugin {
-      name = "vim-misc";
-      src = inputs.vim-misc;
-    };
-
     vim-pgsql = vimUtils.buildVimPlugin {
       name = "vim-pgsql";
       src = sources.vim-pgsql;
