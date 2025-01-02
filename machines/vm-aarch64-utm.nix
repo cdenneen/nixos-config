@@ -13,6 +13,17 @@
   services.quemuGuest.enable = true;
   services.spice-vdagentd.enable = mkSure true;
 
+  systemd.user.services.spice-agent = { 
+    enable = true;
+    wantedBy = ["graphical-session.target"]; 
+    serviceConfig = { ExecStart = "${pkgs.spice-vdagent}/bin/spice-vdagent -x"; }; 
+    unitConfig = { ConditionVirtualization = "vm"; 
+        Description = "Spice guest session agent"; 
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+    }; 
+  };
+
   # For now, we need this since hardware acceleration does not work.
   environment.variables.LIBGL_ALWAYS_SOFTWARE = "1";
 
