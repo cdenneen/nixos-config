@@ -26,7 +26,7 @@
   fileSystems."/home/cdenneen/src" =
     { device = "http://localhost:9843/src";
       fsType = "davfs";
-      options = [ "nofail" "uid=1001" "gid=100" "file_mode=0770" "dir_mode=0770" ];
+      options = [ "nofail" "uid=1001" "gid=100" ];
     };
 
   swapDevices = [ ];
