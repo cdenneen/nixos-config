@@ -221,10 +221,7 @@ in {
       setopt hist_find_no_dups
     '';
 
-    plugins = map (n: {
-      name = n;
-      src  = sources.${n};
-    }) [
+    plugins = [
       {
         # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
