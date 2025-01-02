@@ -11,7 +11,7 @@
   services.davfs2.enable = true;
   services.dbus.packages = with pkgs; [ gnome2.GConf ];
   services.quemuGuest.enable = true;
-  services.spice-vdagentd.enable = mkSure true;
+  services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;
 
   systemd.user.services.spice-agent = { 
