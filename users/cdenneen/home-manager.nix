@@ -117,6 +117,8 @@ in {
 
   programs.gpg.enable = !isDarwin;
 
+  programs.atuin.enable = true;
+
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
@@ -385,6 +387,9 @@ in {
 
   programs.neovim = {
     enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
     withPython3 = true;
