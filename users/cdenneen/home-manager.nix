@@ -117,6 +117,21 @@ in {
 
   programs.gpg.enable = !isDarwin;
 
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    settings = {
+      format = ''
+        $directory
+        $character
+      '';
+      add_newline = true;
+      package = {
+        disabled = true;
+      }
+    }
+  };
+
   programs.bash = {
     enable = true;
     shellOptions = [];
@@ -149,6 +164,12 @@ in {
         exact = ["$HOME/.envrc"];
       };
     };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    tmux.enableShellIntegration = true;
   };
 
   programs.zsh = {
@@ -253,6 +274,7 @@ in {
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Chris Denneen";
     userEmail = "cdenneen@gmail.com";
     signing = {
@@ -270,6 +292,7 @@ in {
       core.askPass = ""; # needs to be empty to use terminal for ask pass
       credential.helper = "store"; # want to make this more secure
       github.user = "cdenneen";
+      pull.rebase = "true";
       push.default = "tracking";
       init.defaultBranch = "main";
     };
@@ -290,9 +313,16 @@ in {
 
   programs.tmux = {
     enable = true;
+
+    aggressiveResize = true;
+    baseIndex = 1;
+    disableConfirmationPrompt = true;
+    keyMode = "vi";
+    newSession = true;
+    secureSocket = true;
+    shell = "${pkgs.zsh}/bin/zsh";
     terminal = "xterm-256color";
     shortcut = "l";
-    secureSocket = false;
     mouse = true;
 
     extraConfig = ''
@@ -309,6 +339,11 @@ in {
     '';
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = ["--cmd cd"];
+  };
   programs.alacritty = {
     enable = !isWSL;
 
