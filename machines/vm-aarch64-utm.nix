@@ -10,7 +10,7 @@
   # Qemu
   services.davfs2 = {
     enable = true;
-    extraConfig = ''
+    settings = ''
       ask_auth 0
     '';
   };
