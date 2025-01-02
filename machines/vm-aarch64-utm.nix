@@ -10,7 +10,7 @@
   # Qemu
   services.davfs2.enable = true;
   services.dbus.packages = with pkgs; [ gnome2.GConf ];
-  services.quemuGuest.enable = true;
+  services.qemuGuest.enable = true;
   services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;
 
