@@ -34,7 +34,11 @@
     # Other packages
     jujutsu.url = "github:martinvonz/jj";
     zig.url = "github:mitchellh/zig-overlay";
-    sops-nix.url = "github:Mic92/sops-nix";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Non-flakes
     nvim-conform.url = "github:stevearc/conform.nvim/v7.1.0";

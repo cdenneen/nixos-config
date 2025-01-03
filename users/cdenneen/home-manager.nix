@@ -14,6 +14,8 @@ let
     '' else ''
     cat "$1" | col -bx | bat --language man --style plain
   ''));
+
+  homeDirectory = config.home.homeDirectory;
 in {
   # Home-manager 22.11 requires this be set. We never set it so we have
   # to use the old state version.
@@ -553,5 +555,11 @@ in {
     package = pkgs.vanilla-dmz;
     size = 128;
     x11.enable = true;
+  };
+
+  sops = {
+    age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
+    defaultSopsFile = builtins.readFile ./secrets/secret.yaml;
+    validateSopsFiles = false;
   };
 }
