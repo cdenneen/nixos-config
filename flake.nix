@@ -91,6 +91,7 @@
     nixosConfigurations.vm-aarch64-utm = mkSystem "vm-aarch64-utm" rec {
       system = "aarch64-linux";
       user   = "cdenneen";
+      inherit self;
     };
 
     nixosConfigurations.vm-intel = mkSystem "vm-intel" rec {
