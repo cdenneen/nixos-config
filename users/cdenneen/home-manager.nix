@@ -142,11 +142,11 @@ in {
     enable = true;
     icons = "auto";
 
-    extraOptions = {
+    extraOptions = [
       "--group-directories-first"
       "--no-quotes"
       "--git-ignore"
-    };
+    ];
   };
 
   programs.starship = {
