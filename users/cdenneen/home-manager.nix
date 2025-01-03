@@ -345,7 +345,7 @@ in {
       "0xBFEB75D960DFAA6B"
     ];
     extraFlags = [
-      "--dir ${config.xdg.runtimeDir}/keychain"
+      "--dir $XDG_RUNTIME_DIR"
       "--absolute"
       "--quiet"
     ];
