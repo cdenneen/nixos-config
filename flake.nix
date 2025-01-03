@@ -34,6 +34,7 @@
     # Other packages
     jujutsu.url = "github:martinvonz/jj";
     zig.url = "github:mitchellh/zig-overlay";
+    sops-nix.url = "github:Mic92/sops-nix";
 
     # Non-flakes
     nvim-conform.url = "github:stevearc/conform.nvim/v7.1.0";
@@ -62,7 +63,7 @@
     vim-misc.flake = false;
   };
 
-  outputs = { self, nixpkgs, home-manager, darwin, ... }@inputs: let
+  outputs = { self, nixpkgs, home-manager, sops-nix, darwin, ... }@inputs: let
     # Overlays is the list of overlays we want to apply from flake inputs.
     overlays = [
       inputs.jujutsu.overlays.default

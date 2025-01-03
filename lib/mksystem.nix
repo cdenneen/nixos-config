@@ -47,6 +47,9 @@ in systemFunc rec {
         isWSL = isWSL;
         inputs = inputs;
       };
+      home-manager.sharedModules = [
+        inputs.sops-nix.homeManagerModules.sops # sops
+      ];
     }
 
     # We expose some extra arguments so that our modules can parameterize
