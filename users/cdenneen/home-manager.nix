@@ -87,8 +87,6 @@ in {
   };
 
   home.file = {
-    ".gnupg/private-keys-v1.d/cdenneen@gmail.com.enc".source = config.sops.secrets."gpg_gmail".path;
-    ".gnupg/private-keys-v1.d/cdenneen@ap.org.enc".source = config.sops.secrets."gpg_ap".path;
     ".gdbinit".source = ./gdbinit;
     ".inputrc".source = ./inputrc;
   } // (if isDarwin then {
@@ -563,5 +561,16 @@ in {
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = builtins.readFile ./secrets/secret.yaml;
     validateSopsFiles = false;
+  };
+
+  sops.secrets = {
+    "gpg_gmail" = {
+      path = "${homeDirectory}/.gnupg/private-keys-v1.d/personal.enc";
+      mode = "0400";
+    };
+    "gpg_ap" = {
+      path = "${homeDirectory}/.gnupg/private-keys-v1.d/work.enc";
+      mode = "0400";
+    };
   };
 }
