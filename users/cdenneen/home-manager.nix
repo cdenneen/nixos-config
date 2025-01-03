@@ -565,11 +565,11 @@ in {
 
   sops.secrets = {
     "gpg_gmail" = {
-      path = "${homeDirectory}/.gnupg/private-keys-v1.d/personal.enc";
+      path = "${homeDirectory}/.gnupg/private-keys-v1.d/personal.key";
       mode = "0400";
     };
     "gpg_ap" = {
-      path = "${homeDirectory}/.gnupg/private-keys-v1.d/work.enc";
+      path = "${homeDirectory}/.gnupg/private-keys-v1.d/work.key";
       mode = "0400";
     };
   };
