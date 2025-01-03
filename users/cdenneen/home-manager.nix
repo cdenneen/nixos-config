@@ -236,27 +236,7 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellInit = ''
-      #█▓▒░ ssh & gpg keychain init
-      eval $(keychain --dir "$XDG_RUNTIME_DIR"\
-      	--absolute -q --agents ssh,gpg \
-      	--eval ~/.ssh/id_ed25519 0x3834814930B83A30 0xBFEB75D960DFAA6B)
-      
-      #█▓▒░ 1password
-      if [ -n "$(op account list)" ]; then
-      	echo "unlock your keychain 󱕵"
-      	read -rs _pw
-      	if [ -n "$_pw" ]; then
-      		printf "logging in: "
-      		accounts=("${(f)$(op account list | tail -n +2 | sed 's/ .*//')}")
-      		for acct in "${accounts[@]}" ;do
-      			printf "%s " "$acct"
-      			eval $(echo "$_pw" | op signin --account "$acct")
-      		done
-      		echo
-      	fi
-      fi
-    '';
+    shellInit = builtins.readFile ./zlogin;
 
     shellAliases = {
       ga = "git add";
