@@ -87,6 +87,8 @@ in {
   };
 
   home.file = {
+    ".gnupg/private-keys-v1.d/cdenneen@gmail.com.enc".source = config.sops.secrets.gpg_gmail;
+    ".gnupg/private-keys-v1.d/cdenneen@ap.org.enc".source = config.sops.secrets.gpg_ap;
     ".gdbinit".source = ./gdbinit;
     ".inputrc".source = ./inputrc;
   } // (if isDarwin then {
