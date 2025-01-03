@@ -1,4 +1,4 @@
-{ isWSL, inputs, ... }:
+{ isWSL, self, inputs, ... }:
 
 { config, lib, pkgs, ... }:
 
@@ -559,7 +559,7 @@ in {
 
   sops = {
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
-    defaultSopsFile = builtins.readFile ./secrets/secret.yaml;
+    defaultSopsFile = "${self}/secrets/secret.yaml";
     validateSopsFiles = false;
   };
 
