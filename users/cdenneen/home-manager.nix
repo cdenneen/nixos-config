@@ -85,7 +85,6 @@ in {
   };
 
   home.file = {
-    ".zlogin".source = ./zsh/zlogin;
     ".gdbinit".source = ./gdbinit;
     ".inputrc".source = ./inputrc;
   } // (if isDarwin then {
@@ -238,9 +237,7 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    interactiveShellInit = ''
-      source $HOME/.zlogin
-    '';
+    loginExtra = builtins.readFile ./zsh/zlogin;
 
     shellAliases = {
       ga = "git add";
