@@ -376,7 +376,6 @@ in {
 
     plugins = with pkgs; [
       tmuxPlugins.yank
-      tmuxPlugins.tpm
       tmuxPlugins.sensible
       tmuxPlugins.resurrect
       tmuxPlugins.continuum
