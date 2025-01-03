@@ -115,7 +115,25 @@ in {
   # Programs
   #---------------------------------------------------------------------
 
-  programs.gpg.enable = !isDarwin;
+  programs.gpg = {
+    enable = !isDarwin;
+    homedir = "${config.xdg.dataHome}/gpg";
+    settings = {
+      no-greeting = true;
+      use-agent = true;
+      list-options = "show-uid-validity";
+      verify-options = "show-uid-validity";
+      keyid-format = "0xlong";
+      keyserver = "hkps://keys.openpgp.org";
+      fixed-list-mode = true;
+      charset = "utf-8";
+      with-fingerprint = true;
+      require-cross-certification = true;
+      no-emit-version = true;
+      no-comments = true;
+    };
+  };
+
 
   programs.atuin = {
     enable = true;
@@ -319,6 +337,20 @@ in {
     ];
   };
 
+  programs.keychain = {
+    enable = true;
+    agents = [ "ssh" "gpg" ];
+    keys = [
+      "0x3834814930B83A30"
+      "0xBFEB75D960DFAA6B"
+    ];
+    extraFlags = [
+      "--dir ${config.xdg.runtimeDir}/keychain"
+      "--absolute"
+      "--quiet"
+    ];
+  };
+
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -326,7 +358,7 @@ in {
     userEmail = "cdenneen@gmail.com";
     ignores = [ ".DS_Store" "Thumbs.db" ];
     signing = {
-      key = "523D5DC389D273BC";
+      key = "BFEB75D960DFAA6B";
       signByDefault = false;
     };
     aliases = {
@@ -492,6 +524,9 @@ in {
 
   services.gpg-agent = {
     enable = isLinux;
+    enableSshSupport = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
     pinentryPackage = pkgs.pinentry-tty;
 
     # cache the keys forever so we don't get asked for a password
