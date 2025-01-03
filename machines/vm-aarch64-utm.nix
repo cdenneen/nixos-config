@@ -10,7 +10,10 @@
   # Qemu
   services.davfs2 = {
     enable = true;
-    settings.globalSection.ask_auth = 0;
+    settings.globalSection = {
+      ask_auth = 0;
+      use_locks = false;
+    };
   };
 
   services.dbus.packages = with pkgs; [ gnome2.GConf ];
