@@ -24,7 +24,6 @@ let
   home-manager = if darwin then inputs.home-manager.darwinModules else inputs.home-manager.nixosModules;
 in systemFunc rec {
   inherit system;
-  inherit self;
 
   modules = [
     # Apply our overlays. Overlays are keyed by system type so we have
@@ -47,6 +46,7 @@ in systemFunc rec {
       home-manager.users.${user} = import userHMConfig {
         isWSL = isWSL;
         inputs = inputs;
+        self = self;
       };
       home-manager.sharedModules = [
         inputs.sops-nix.homeManagerModules.sops # sops
