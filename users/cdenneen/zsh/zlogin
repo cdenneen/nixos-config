@@ -16,3 +16,4 @@ if [ -n "$(op account list)" ]; then
 		done
 		echo
 	fi
+fi
