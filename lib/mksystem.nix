@@ -37,8 +37,6 @@ in systemFunc rec {
     # Bring in WSL if this is a WSL build
     (if isWSL then inputs.nixos-wsl.nixosModules.wsl else {})
 
-    inputs.sops-nix.homeManagerModules.sops # sops
-
     machineConfig
     userOSConfig
     home-manager.home-manager {
