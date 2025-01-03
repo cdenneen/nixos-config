@@ -117,7 +117,37 @@ in {
 
   programs.gpg.enable = !isDarwin;
 
-  programs.atuin.enable = true;
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow"];
+  };
+
+  programs.autojump = {
+    enable = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
+  };
+
+  programs.bat = {
+    enable = true;
+    config = {
+      pager = "less -FirSwX";
+      theme = "TwoDark";
+    }
+  };
+  programs.btop.enable = true;
+  programs.jq.enable = true;
+
+  programs.eza = {
+    enable = true;
+    icons = "auto";
+
+    extraOptions = {
+      "--group-directories-first"
+      "--no-quotes"
+      "--git-ignore"
+    };
+  };
 
   programs.starship = {
     enable = true;
@@ -157,6 +187,9 @@ in {
     enable = true;
 
     config = {
+      global = {
+        load_dotenv = true;
+      };
       whitelist = {
         prefix= [
           "$HOME/code/go/src/github.com/hashicorp"
@@ -172,10 +205,15 @@ in {
     enable = true;
     enableZshIntegration = true;
     tmux.enableShellIntegration = true;
+    defaultCommand = "fd --type f";
+    fileWidgetCommand = "fd --type f";
   };
 
   programs.zsh = {
     enable = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
+
     shellAliases = {
       ga = "git add";
       gc = "git commit";
@@ -194,12 +232,19 @@ in {
       vim = "nvim";
       ls = "ls --color";
       clean = "clear";
+      switch = if pkgs.stdenv.isDarwin then "darwin-rebuild switch --flake github:cdenneen/nixos-config#mac" else "sudo nixos-rebuild switch --flake github:cdenneen/nixos-config#vm-aarch64-utm";
+
     } // (if isLinux then {
       # Two decades of using a Mac has made this such a strong memory
       # that I'm just going to keep it consistent.
       pbcopy = "xclip";
       pbpaste = "xclip -o";
     } else {});
+
+    sessionVariables = {
+      # This is required for the zoxide integration
+      ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=8";
+    };
 
     initExtra = ''
       export EDITOR=nvim
@@ -279,6 +324,7 @@ in {
     lfs.enable = true;
     userName = "Chris Denneen";
     userEmail = "cdenneen@gmail.com";
+    ignores = [ ".DS_Store" "Thumbs.db" ];
     signing = {
       key = "523D5DC389D273BC";
       signByDefault = false;
@@ -296,6 +342,7 @@ in {
       github.user = "cdenneen";
       pull.rebase = "true";
       push.default = "tracking";
+      push.autoSetupRemote = true;
       init.defaultBranch = "main";
     };
   };
@@ -327,6 +374,14 @@ in {
     shortcut = "l";
     mouse = true;
 
+    plugins = with pkgs; [
+      tmuxPlugins.yank
+      tmuxPlugins.tpm
+      tmuxPlugins.sensible
+      tmuxPlugins.resurrect
+      tmuxPlugins.continuum
+    ];
+
     extraConfig = ''
       set -ga terminal-overrides ",*256col*:Tc"
 
@@ -335,6 +390,10 @@ in {
       set -g @dracula-show-weather false
 
       bind -n C-k send-keys "clear"\; send-keys "Enter"
+
+      set-option -g default-command "${pkgs.zsh}/bin/zsh"
+      set-option -g default-shell "${pkgs.zsh}/bin/zsh"
+      set -g @resurrect-capture-pane-contents 'on'
 
       run-shell ${sources.tmux-pain-control}/pain_control.tmux
       run-shell ${sources.tmux-dracula}/dracula.tmux
