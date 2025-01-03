@@ -118,6 +118,10 @@ in {
   programs.gpg = {
     enable = !isDarwin;
     homedir = "${config.xdg.dataHome}/gpg";
+    publicKeys = [
+      { source = ../../keys/gpg-0x3834814930B83A30.asc; }
+      { source = ../../keys/gpg-0xBFEB75D960DFAA6B.asc; }
+    ];
     settings = {
       no-greeting = true;
       use-agent = true;
