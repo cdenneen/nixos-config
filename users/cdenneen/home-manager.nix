@@ -559,7 +559,7 @@ in {
 
   sops = {
     age.keyFile = "${homeDirectory}/.config/sops/age/keys.txt";
-    defaultSopsFile = "${self}/secrets/secret.yaml";
+    defaultSopsFile = "${self}/users/cdenneen/secrets/secret.yaml";
     validateSopsFiles = false;
   };
 
