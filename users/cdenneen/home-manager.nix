@@ -238,7 +238,7 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    shellInit = ''
+    interactiveShellInit = ''
       source $HOME/.zlogin
     '';
 
