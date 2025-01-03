@@ -133,7 +133,7 @@ in {
     config = {
       pager = "less -FirSwX";
       theme = "TwoDark";
-    }
+    };
   };
   programs.btop.enable = true;
   programs.jq.enable = true;
