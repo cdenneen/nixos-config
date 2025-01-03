@@ -238,6 +238,10 @@ in {
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    shellInit = ''
+      source $HOME/.zlogin
+    '';
+
     shellAliases = {
       ga = "git add";
       gc = "git commit";
